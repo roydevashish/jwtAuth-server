@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/roydevashish/men-stack-backend-boilerplate/issues"
   },
-  "homepage": "https://github.com/roydevashish/men-stack-backend-boilerplate#readme"
+  "homepage": "https://github.com/roydevashish/men-stack-backend-boilerplate#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
 }
