@@ -1,0 +1,27 @@
+{
+  "name": "men-stack-backend-boilerplate",
+  "version": "1.0.0",
+  "description": "A ready-to-use backend template built with the MEN stack: MongoDB, Express, and Node.js. Provides a clean, modular, and scalable foundation with essential configs, routing, error handling, and Mongoose integration to quickly build RESTful APIs without starting from scratch.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roydevashish/men-stack-backend-boilerplate.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express.js",
+    "node.js",
+    "backend",
+    "boilerplate"
+  ],
+  "author": "Devashish Roy",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/roydevashish/men-stack-backend-boilerplate/issues"
+  },
+  "homepage": "https://github.com/roydevashish/men-stack-backend-boilerplate#readme"
+}
