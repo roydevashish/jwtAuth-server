@@ -1,7 +1,7 @@
 {
-  "name": "men-stack-backend-boilerplate",
+  "name": "jwt-auth-server",
   "version": "1.0.0",
-  "description": "A ready-to-use backend template built with the MEN stack: MongoDB, Express, and Node.js. Provides a clean, modular, and scalable foundation with essential configs, routing, error handling, and Mongoose integration to quickly build RESTful APIs without starting from scratch.",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,21 +9,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roydevashish/men-stack-backend-boilerplate.git"
+    "url": "git+https://github.com/roydevashish/jwtAuth-server.git"
   },
   "keywords": [
-    "mongodb",
-    "express.js",
-    "node.js",
+    "jwt",
+    "auth",
+    "server",
+    "javascript",
     "backend",
-    "boilerplate"
+    "nodejs",
+    "express",
+    "mongodb"
   ],
   "author": "Devashish Roy",
   "license": "",
   "bugs": {
-    "url": "https://github.com/roydevashish/men-stack-backend-boilerplate/issues"
+    "url": "https://github.com/roydevashish/jwtAuth-server/issues"
   },
-  "homepage": "https://github.com/roydevashish/men-stack-backend-boilerplate#readme",
+  "homepage": "https://github.com/roydevashish/jwtAuth-server#readme",
   "devDependencies": {
     "nodemon": "^3.1.10"
   },
