@@ -65,13 +65,13 @@ const login = asyncHandler(async (req, res) => {
     const resData = {
       "_id": existingUser._id,
       "email": existingUser.email,
-      "access-token": accessToken,
-      "refresh-token": refreshToken
+      "accessToken": accessToken,
+      "refreshToken": refreshToken
     }
 
     res.status(200)
-    .cookie("access-token", accessToken, cookieOptions)
-    .cookie("refresh-token", refreshToken, cookieOptions)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", refreshToken, cookieOptions)
     .json(
       new APIResponse(200, resData, "User logged in successfully.")
     );
