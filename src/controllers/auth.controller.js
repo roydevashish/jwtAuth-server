@@ -8,13 +8,13 @@ import jwt from "jsonwebtoken";
 const register = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  if(!email && !password) {
+  if (!email && !password) {
     throw new APIError(400, "Email and Password both required.");
   }
 
   try {
     const existingUser = await User.findOne({ email });
-    if(existingUser) {
+    if (existingUser) {
       throw new APIError(400, "User already exists.");
     }
 
@@ -48,12 +48,12 @@ const login = asyncHandler(async (req, res) => {
 
   try {
     const existingUser = await User.findOne({ email });
-    if(!existingUser) {
+    if (!existingUser) {
       throw new APIError(400, "User doesn't exists.");
     }
 
     const isPasswordCorrect = await existingUser.isPasswordCorrect(password);
-    if(!isPasswordCorrect) {
+    if (!isPasswordCorrect) {
       throw new APIError(400, "Invalid credentials.");
     }
 
@@ -71,11 +71,11 @@ const login = asyncHandler(async (req, res) => {
     }
 
     res.status(200)
-    .cookie("accessToken", accessToken, cookieOptions)
-    .cookie("refreshToken", refreshToken, cookieOptions)
-    .json(
-      new APIResponse(200, resData, "User logged in successfully.")
-    );
+      .cookie("accessToken", accessToken, cookieOptions)
+      .cookie("refreshToken", refreshToken, cookieOptions)
+      .json(
+        new APIResponse(200, resData, "User logged in successfully.")
+      );
   } catch (error) {
     console.log("🚫 Internal server error: ");
     console.log(error);
@@ -101,15 +101,15 @@ const logout = asyncHandler(async (req, res) => {
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const refreshToken = req.cookies?.refreshToken;
-  if(!refreshToken) {
+  if (!refreshToken) {
     throw new APIError(400, "Invalid credentials.");
   }
 
   try {
     const decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    
+
     const user = await User.findById(decodedToken._id).select("-password");
-    if(!user) {
+    if (!user) {
       throw new APIError(404, "User doesn't exists.");
     }
 
@@ -127,11 +127,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 
     res.status(200)
-    .cookie("accessToken", newAccessToken, cookieOptions)
-    .cookie("refreshToken", newRefreshToken, cookieOptions)
-    .json(
-      new APIResponse(200, resData, "Tokens refreshed successfully.")
-    );
+      .cookie("accessToken", newAccessToken, cookieOptions)
+      .cookie("refreshToken", newRefreshToken, cookieOptions)
+      .json(
+        new APIResponse(200, resData, "Tokens refreshed successfully.")
+      );
   } catch (error) {
     throw new APIError(401, "Unauthorized.");
   }

@@ -1,6 +1,6 @@
 // config environment variables
 import dotenv from "dotenv";
-dotenv.config({path: "./env"});
+dotenv.config({ path: "./env" });
 
 import connectToDB from "./src/db/connectToDB.js";
 import app from "./src/app.js";
