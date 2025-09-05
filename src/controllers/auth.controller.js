@@ -3,6 +3,7 @@ import User from "../models/user.model.js";
 import APIResponse from "../utils/APIResponse.js";
 import APIError from "../utils/APIError.js";
 import { cookieOptions } from "../utils/cookie.js";
+import jwt from "jsonwebtoken";
 
 const register = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -98,8 +99,47 @@ const logout = asyncHandler(async (req, res) => {
   );
 });
 
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const refreshToken = req.cookies?.refreshToken;
+  if(!refreshToken) {
+    throw new APIError(400, "Invalid credentials.");
+  }
+
+  try {
+    const decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    
+    const user = await User.findById(decodedToken._id).select("-password");
+    if(!user) {
+      throw new APIError(404, "User doesn't exists.");
+    }
+
+    const newAccessToken = user.generateAccessToken();
+    const newRefreshToken = user.generateRefreshToken();
+
+    user.refreshToken = newRefreshToken;
+    await user.save();
+
+    const resData = {
+      "_id": user._id,
+      "email": user.email,
+      "accessToken": newAccessToken,
+      "refreshToken": newRefreshToken
+    }
+
+    res.status(200)
+    .cookie("accessToken", newAccessToken, cookieOptions)
+    .cookie("refreshToken", newRefreshToken, cookieOptions)
+    .json(
+      new APIResponse(200, resData, "Tokens refreshed successfully.")
+    );
+  } catch (error) {
+    throw new APIError(401, "Unauthorized.");
+  }
+});
+
 export {
   register,
   login,
-  logout
+  logout,
+  refreshAccessToken
 }
